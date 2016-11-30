@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 class XmlUtilities(object):
     """docstring for JsonUtilities"""
 
-    def get_xml_data(data=''):
+    def get_xml_data(self, data=''):
         root = ET.fromstring(data)
         data = []
         required_data = [
@@ -12,7 +12,8 @@ class XmlUtilities(object):
             'title',
             'reviewer',
             'comment',
-            'submissionTime'
+            'submissionTime',
+            'sku'
         ]
 
         for child in root:
