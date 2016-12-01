@@ -37,6 +37,39 @@ class CsvUtilities(object):
                 csv_writer.writerow(add_row)
         return file_name
 
+    def create_file_with_json_data(self, file_name='reviews.txt', data=[], products_info=[], email=''):
+        if not data:
+            return None
+
+        with open(file_name, 'wb') as csvfile:
+            csv_writer = csv.writer(
+                csvfile,
+                delimiter=','
+            )
+
+            csv_writer.writerow(
+                ['product_handle', 'rating', 'title', 'author', 'email', 'body', 'created_at']
+            )
+
+            for row in data:
+                product_name = ''
+                for product in products_info:
+                    if int(product[0]) == row['sku']:
+                        product_name = product[1]
+
+                add_row = [
+                    product_name,
+                    row['rating'],
+                    row['title'],
+                    row['reviewer'],
+                    email,
+                    row['comment'],
+                    row['submissionTime']
+                ]
+                # print(add_row)
+                csv_writer.writerow(add_row)
+        return file_name
+
     def get_product_name_and_sku(self, filename):
         with open(filename) as csvfile:
             file_data = csv.DictReader(csvfile)
